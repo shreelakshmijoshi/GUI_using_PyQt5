@@ -18,12 +18,12 @@ class Page1(QMainWindow):
         object_for_nameValidator = QRegExpValidator(QRegExp("[A-Za-z ]+"))
         self.lineEdit_input_name.setValidator(object_for_nameValidator)
         
-        # \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+        
         #it will allow user to enter valid email IDs
         object_for_emailValidator = QRegExpValidator(QRegExp("[a-zA-Z0-9+_.-]+@[a-z]+[.a-z]{2,4}"))
         self.lineEdit_input_email_ID.setValidator(object_for_emailValidator)
         
-        
+
         self.pushButton_next_page.clicked.connect(self.show_page2)
         
         
@@ -59,6 +59,10 @@ class Page1(QMainWindow):
         x = msg.exec_()
 
     def check_email_ID(self, email_ID):
+        """checks if the given email ID is according to regular expression of email ID
+           returns False if it's not according to regex
+           otherwise returns True
+        """
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         if(re.fullmatch(regex, email_ID)):
             return True
@@ -67,7 +71,7 @@ class Page1(QMainWindow):
     def check_if_empty(self):
         """checks if input fields are empty , calls show_error_popup method if some field is empty
            checks if the age is in between [0, 150], calls show_error_popup with the given error
-    
+            
            if there are no errors, empty fields, this method returns True, else returns False
         """
         username = self.lineEdit_input_name.text()
@@ -84,6 +88,7 @@ class Page1(QMainWindow):
                 return False
         else:
             self.show_error_popup()
+            return False
         return True
     
 class Page2(QMainWindow):
@@ -111,7 +116,7 @@ class Page2(QMainWindow):
         """Opens the file explorer of the system to find resume 
            prints the name of the file with location in lineEdit text box  
         """
-        resume_file = QtWidgets.QFileDialog.getOpenFileName(None, 'Open your resume ', 'D:\\') 
+        resume_file = QtWidgets.QFileDialog.getOpenFileName(None, 'Open your resume ', 'C:\\Users\\shree\\OneDrive\\Desktop') 
         self.lineEdit_input_resume.setText(resume_file[0])
         
     def show_popup(self):
@@ -136,21 +141,23 @@ class Page2(QMainWindow):
            otherwise returns False
         """
         institution = self.lineEdit_input_institution.text()
-        ug_cgpa = float(self.lineEdit_input_ug_cgpa.text())
-        pg_cgpa = float(self.lineEdit_input_pg_cgpa.text())
+        ug_cgpa = (self.lineEdit_input_ug_cgpa.text())
+        pg_cgpa = (self.lineEdit_input_pg_cgpa.text())
         ug_combobox = str(self.comboBox_input_UGCourse.currentText())
         pg_combobox = str(self.comboBox_input_PGCourse.currentText())
         resume = self.lineEdit_input_resume.text()
         combobox_isSelected = ug_combobox != "Select" and pg_combobox != "Select"
         valid_cgpa = True
-        if (ug_cgpa < 0.0 or ug_cgpa > 10.0) or (pg_cgpa < 0.0 or pg_cgpa > 10.0):
-            self.show_specific_error_popup("CGPA should be in the range of 0 to 10")
-            valid_cgpa = False
-            return False
         if institution and valid_cgpa and combobox_isSelected and resume:
-            return True
-        self.show_error_popup()
-        return False
+            if (float(ug_cgpa) < 0.0 or float(ug_cgpa) > 10.0) or (float(pg_cgpa) < 0.0 or float(pg_cgpa) > 10.0):
+                self.show_specific_error_popup("CGPA should be in the range of 0 to 10")
+                valid_cgpa = False
+                return False
+        else:
+            self.show_error_popup()
+            return False
+        return True    
+        
     
     
     def show_error_popup(self):
