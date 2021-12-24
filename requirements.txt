@@ -1,0 +1,5 @@
+pip install PyQt5
+pip install os-sys
+pip install pyqt5-tools
+pip install regex
+pip install PyQt5Designer
