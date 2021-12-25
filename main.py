@@ -116,7 +116,8 @@ class Page2(QMainWindow):
         """Opens the file explorer of the system to find resume 
            prints the name of the file with location in lineEdit text box  
         """
-        resume_file = QtWidgets.QFileDialog.getOpenFileName(None, 'Open your resume ', 'C:\\Users\\shree\\OneDrive\\Desktop') 
+#         resume_file = QtWidgets.QFileDialog.getOpenFileName(None, 'Open your resume ', 'C:\\Users\\shree\\OneDrive\\Desktop') 
+        resume_file = QtWidgets.QFileDialog.getOpenFileName(None, 'Open your resume ', 'D:\\') 
         self.lineEdit_input_resume.setText(resume_file[0])
         
     def show_popup(self):
