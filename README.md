@@ -2,7 +2,7 @@
 A GUI in python for uploading user details and educational information.
 
 ### ``Note`` :
-####  To open resume from your computer, change the path in file, main.py from ['C:\\Users\\shree\\OneDrive\\Desktop'](https://github.com/shreelakshmijoshi/GUI_using_PyQt5/blob/9bb0da62795ad2ca5c23cd8a6c834c8562164063/main.py#L119) to 'D://'
+####  To open resume from your computer, change the path in file, main.py from ['C:\\Users\\shree\\OneDrive\\Desktop'](https://github.com/shreelakshmijoshi/GUI_using_PyQt5/blob/9bb0da62795ad2ca5c23cd8a6c834c8562164063/main.py#L119) to 'D:\\'
 
 ## Normal Execution
 
